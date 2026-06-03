@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI/CV Intern Study Guide & Interview Prep</title>
+    
+    <!-- Google Fonts: Outfit & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #131b2e;
+            --text-color: #e2e8f0;
+            --text-muted: #94a3b8;
+            --primary: #00f2fe;
+            --secondary: #9d4edd;
+            --accent: #ff007f;
+            --border-color: #1e293b;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(157, 78, 221, 0.05) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header Area */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        header .badge {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Tabs Navigation */
+        .tabs {
+            display: flex;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.4rem;
+            margin-bottom: 2rem;
+            gap: 0.3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 0.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tab-btn span {
+            font-size: 0.75rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.2rem;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.15) 0%, rgba(157, 78, 221, 0.15) 100%);
+            color: var(--primary);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Content Sections */
+        .content-panel {
+            display: none;
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+
+        /* Cards Layout */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 242, 254, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+
+        /* Grid Lists */
+        .grid-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .grid-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .grid-item:hover {
+            background: rgba(0, 242, 254, 0.02);
+            border-color: rgba(0, 242, 254, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .grid-item h4 {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .grid-item p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        /* Code Block Styling */
+        pre {
+            background: #070a13;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #a5b4fc;
+        }
+
+        .code-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Interactive Interview Flashcards */
+        .qa-block {
+            background: #0d1322;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .qa-question {
+            padding: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .qa-question:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .qa-question::after {
+            content: '+';
+            font-size: 1.4rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .qa-block.open {
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.05);
+        }
+
+        .qa-block.open .qa-question::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
+
+        .qa-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0, 0, 0, 0.15);
+            border-top: 0 solid var(--border-color);
+        }
+
+        .qa-block.open .qa-answer {
+            max-height: 1000px; /* high value to allow expansion */
+            border-top-width: 1px;
+        }
+
+        .qa-answer-content {
+            padding: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            border-left: 3px solid var(--primary);
+        }
+
+        .qa-answer-content strong {
+            color: var(--text-color);
+        }
+
+        /* Alert Callout */
+        .callout {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 4px solid var(--success);
+            padding: 1.2rem;
+            border-radius: 0 12px 12px 0;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .callout-icon {
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .callout-body h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .callout-body p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2d3748;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <span class="badge">Optimized Electrotech</span>
+            <h1>AI/CV Intern Interview Prep Hub</h1>
+            <p>Master your project codebase & computer vision fundamentals in 4 days</p>
+        </header>
+
+        <!-- Tabs Navigation -->
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'day1')">
+                <span>Day 1</span>
+                Image Processing
+            </button>
+            <button class="tab-btn" onclick="switchTab(event, 'day2')">
+                <span>Day 2</span>
+                Detection & Tracking
+            </button>
+            <button class="tab-btn" onclick="switchTab(event, 'day3')">
+                <span>Day 3</span>
+                Evaluation Metrics
+            </button>
+            <button class="tab-btn" onclick="switchTab(event, 'day4')">
+                <span>Day 4</span>
+                Inference & C++
+            </button>
+        </nav>
+
+        <!-- DAY 1 PANEL -->
+        <section id="day1" class="content-panel active">
+            <div class="card">
+                <h3 class="card-title">📚 Day 1: Core Concepts</h3>
+                <div class="grid-list">
+                    <div class="grid-item">
+                        <h4>Grayscale Representation</h4>
+                        <p>Converting BGR to Grayscale isolates luminance from chrominance, simplifying operations and reducing compute bandwidth by 66% (1 channel instead of 3).</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>CLAHE Equalization</h4>
+                        <p>Contrast Limited Adaptive Histogram Equalization operates on local 8x8 tiles. It limits contrast amplification using a clip limit to prevent over-amplifying background camera noise.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Thermal Colormapping</h4>
+                        <p>Uses lookup tables (e.g. Inferno) to convert grayscale light intensities into multi-color heat spectrum visualizations, enhancing target distinguishability.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Multi-Sensor Edge Fusion</h4>
+                        <p>Detects sharp structural profiles via Canny edge filters and overlays them back onto thermal streams using weighted addition to restore structural boundaries.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">🔍 Code Reference</h3>
+                <div class="code-title">📄 smart_surveillance.py (Line 48-70)</div>
+                <pre><code>def enhance_low_light(frame, colormap_idx=0, enable_edge_fusion=True):
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    clahe = cv2.createCLAHE(clipLimit=CLAHE_CLIP_LIMIT, tileGridSize=CLAHE_GRID_SIZE)
+    enhanced = clahe.apply(gray)
+    
+    _, colormap_code = COLORMAPS[colormap_idx]
+    thermal = cv2.applyColorMap(enhanced, colormap_code)
+    
+    if enable_edge_fusion:
+        edges = cv2.Canny(enhanced, 40, 120)
+        edges_colored = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
+        edges_colored = np.where(edges_colored > 0, [255, 255, 0], 0).astype(np.uint8)
+        fusion = cv2.addWeighted(thermal, 0.82, edges_colored, 0.18, 0)
+        return fusion
+    return thermal</code></pre>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">💬 Interview Q&A (Interactive)</h3>
+                
+                <div class="qa-block">
+                    <div class="qa-question" onclick="toggleQA(this)">Why use CLAHE instead of standard global histogram equalization?</div>
+                    <div class="qa-answer">
+                        <div class="qa-answer-content">
+                            <strong>Answer:</strong> Global histogram equalization applies a single transformation function to the entire image. If the image has extremely dark areas and extremely bright areas, global equalization will over-saturate the highlights and amplify background noise in the dark areas. <strong>CLAHE (Contrast Limited Adaptive Histogram Equalization)</strong> solves this by dividing the image into localized tiles (usually 8x8) and equalizing them independently. Crucially, it clips the histogram height at a specified limit to prevent contrast over-amplification, redistributing the clipped bins across the histogram before calculating the transformation mapping.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-question" onclick="toggleQA(this)">What is the role of multi-sensor fusion in surveillance systems?</div>
+                    <div class="qa-answer">
+                        <div class="qa-answer-content">
+                            <strong>Answer:</strong> Multi-sensor fusion combines complementary inputs from different spectrum sensors—such as thermal infrared (sensitive to body heat) and electro-optic visible light (sensitive to structural textures and colors)—into a unified visual stream. This allows a security operator or downstream AI models to detect thermal targets while retaining critical details like physical edges, distance contours, and structural environments that thermal-only cameras fail to resolve.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAY 2 PANEL -->
+        <section id="day2" class="content-panel">
+            <div class="card">
+                <h3 class="card-title">📚 Day 2: Core Concepts</h3>
+                <div class="grid-list">
+                    <div class="grid-item">
+                        <h4>Decoupled Detection Heads</h4>
+                        <p>YOLOv8 uses a decoupled head architecture where classification scores and bounding box coordinates are predicted by separate specialized branches, boosting accuracy.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Anchor-Free Bbox Regression</h4>
+                        <p>Predicts target box centers and boundaries directly rather than offset scaling relative to pre-configured anchor boxes, making the network simpler and faster.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Temporal Tracking Association</h4>
+                        <p>Maintains target identities over time by linking detections across frames using Kalman filter motion predictions and spatial overlap calculations.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>ByteTrack Logic</h4>
+                        <p>Rather than discarding low-confidence bounding boxes (which often represent occluded or low-contrast targets), ByteTrack keeps them and maps them to active tracks using IoU association.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">🔍 Code Reference</h3>
+                <div class="code-title">📄 smart_surveillance.py (Line 291-300)</div>
+                <pre><code>results = model.track(
+    thermal_frame,
+    persist=True,
+    classes=TARGET_CLASSES,
+    conf=CONFIDENCE_THRESHOLD,
+    verbose=False
+)</code></pre>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">💬 Interview Q&A (Interactive)</h3>
+                
+                <div class="qa-block">
+                    <div class="qa-question" onclick="toggleQA(this)">What makes YOLOv8 different from previous anchor-based architectures?</div>
+                    <div class="qa-answer">
+                        <div class="qa-answer-content">
+                            <strong>Answer:</strong> YOLOv8 is <strong>anchor-free</strong>, meaning it directly predicts the center coordinates and dimensions of objects rather than estimating offsets relative to a grid of predefined anchor boxes (anchors). This eliminates the complex anchor hyperparameter tuning step. It also features a <strong>decoupled head</strong> where bounding box regression and classification are split into separate convolutional paths, which avoids conflicts between class learning and spatial boundary regression.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-question" onclick="toggleQA(this)">How does ByteTrack prevent tracking losses during occlusions?</div>
+                    <div class="qa-answer">
+                        <div class="qa-answer-content">
+                            <strong>Answer:</strong> Standard trackers discard any bounding box with a confidence score below a threshold (e.g., 0.5), which leads to identity loss (ID switches) if an object gets temporarily covered or enters low-contrast shadow. <strong>ByteTrack</strong> preserves all detections, separating them into high-confidence and low-confidence pools. It first matches high-confidence boxes to existing tracks. For remaining unmatched tracks, it performs a second matching step against the <strong>low-confidence</strong> pool. This recovers occluded targets since their overlap with predicted Kalman filter tracks remains high even if their detection score has dropped.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAY 3 PANEL -->
+        <section id="day3" class="content-panel">
+            <div class="card">
+                <h3 class="card-title">📚 Day 3: Core Concepts</h3>
+                <div class="grid-list">
+                    <div class="grid-item">
+                        <h4>Intersection over Union (IoU)</h4>
+                        <p>A metric measuring the overlap area divided by the union area of predicted vs ground-truth bounding boxes, evaluating spatial accuracy.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Precision / Recall Trade-off</h4>
+                        <p>Precision measures the ratio of true detections to all predicted detections (low false alarms). Recall measures the ratio of true detections to all actual objects (low missed detections).</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>MOTA (Overall Tracking Accuracy)</h4>
+                        <p>Summarizes tracking performance across frames by penalizing False Positives (FP), False Negatives (FN), and Identity Switches (IDSW).</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>IDF1 (ID Consistency Metric)</h4>
+                        <p>Focuses on tracking identity consistency over long durations, measuring how long a specific track preserves the correct target ID.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">🔍 Code Reference</h3>
+                <div class="code-title">📄 evaluate_metrics.py (Line 11-34)</div>
+                <pre><code>def calculate_iou(boxA, boxB):
+    xA = max(boxA[0], boxB[0])
+    yA = max(boxA[1], boxB[1])
+    xB = min(boxA[2], boxB[2])
+    yB = min(boxA[3], boxB[3])
+
+    interArea = max(0, xB - xA + 1) * max(0, yB - yA + 1)
+    boxAArea = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
+    boxBArea = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
+
+    unionArea = float(boxAArea + boxBArea - interArea)
+    return interArea / unionArea if unionArea > 0 else 0.0</code></pre>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">💬 Interview Q&A (Interactive)</h3>
+                
+                <div class="qa-block">
+                    <div class="qa-question" onclick="toggleQA(this)">Explain the difference between MOTA and IDF1.</div>
+                    <div class="qa-answer">
+                        <div class="qa-answer-content">
+                            <strong>Answer:</strong> 
+                            <ul>
+                                <li><strong>MOTA (Multiple Object Tracking Accuracy)</strong> focuses primarily on local detection performance and tracking configuration. It aggregates False Negatives, False Positives, and local ID switches frame-by-frame. It is highly sensitive to detection quality but can be skewed if a tracker switches IDs frequently but recovers detection immediately.</li>
+                                <li><strong>IDF1 (ID F1-Score)</strong> evaluates long-term association consistency. It measures the F1-Score of correctly identified trajectories across the entire video. IDF1 is crucial for multi-camera tracking or target re-identification where keeping a continuous identity mapping over time is more important than local box jitter.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-question" onclick="toggleQA(this)">How do you mathematically compute the F1-Score?</div>
+                    <div class="qa-answer">
+                        <div class="qa-answer-content">
+                            <strong>Answer:</strong> The F1-Score is the harmonic mean of Precision and Recall. The mathematical formula is:
+                            <br><br>
+                            <code style="color: #fff; font-size: 1.1rem; display: block; text-align: center; margin: 0.5rem 0;">F1 = 2 * (Precision * Recall) / (Precision + Recall)</code>
+                            <br>
+                            Where:
+                            <ul>
+                                <li><strong>Precision</strong> = $TP / (TP + FP)$</li>
+                                <li><strong>Recall</strong> = $TP / (TP + FN)$</li>
+                            </ul>
+                            We use the harmonic mean instead of the arithmetic mean because it heavily penalizes extreme values (e.g., if Precision is 100% and Recall is 0%, the arithmetic mean is 50%, but the F1-score is 0%, correctly identifying the failure).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAY 4 PANEL -->
+        <section id="day4" class="content-panel">
+            <div class="card">
+                <h3 class="card-title">📚 Day 4: Core Concepts</h3>
+                <div class="grid-list">
+                    <div class="grid-item">
+                        <h4>ONNX Compilation</h4>
+                        <p>Compiles PyTorch model graphs into standard static layers, optimizing compute operator calls and removing Python runtime overhead.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Inference Optimization Engines</h4>
+                        <p>Formats like ONNX can be deployed directly via highly optimized local engines such as TensorRT (NVIDIA), OpenVINO (Intel), or ONNX Runtime.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>OpenVINO (Intel) Engine</h4>
+                        <p>Specialized compiler that quantizes model weights and schedules parallel threads to maximize inference throughput on Intel CPU/GPU architectures.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>C++ OpenCV DNN APIs</h4>
+                        <p>Allows loading ONNX model weights directly in C++ via `cv::dnn::readNetFromONNX`, preprocessing images, and running network forward passes without deep learning framework dependencies.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">🔍 Code Reference</h3>
+                <div class="code-title">📄 inference_demo.cpp (Line 32-52)</div>
+                <pre><code>// Load ONNX model in C++
+cv::dnn::Net net = cv::dnn::readNetFromONNX("yolov8n.onnx");
+
+// Set input blob and run forward pass
+cv::Mat blob;
+cv::dnn::blobFromImage(frame, blob, 1.0 / 255.0, cv::Size(640, 640), cv::Scalar(), true, false);
+net.setInput(blob);
+
+std::vector&lt;cv::Mat&gt; outputs;
+net.forward(outputs, net.getUnconnectedOutLayersNames());</code></pre>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">💬 Interview Q&A (Interactive)</h3>
+                
+                <div class="qa-block">
+                    <div class="qa-question" onclick="toggleQA(this)">What happens during OpenCV's dnn::blobFromImage operation?</div>
+                    <div class="qa-answer">
+                        <div class="qa-answer-content">
+                            <strong>Answer:</strong> <strong>`cv::dnn::blobFromImage`</strong> converts an input image into a 4D tensor (blob) formatted for neural network layers (typically batch, channels, height, width - NCHW). Under the hood, it performs:
+                            <ol>
+                                <li><strong>Resizing:</strong> Scales the image height and width to target network dimensions (e.g. 640x640).</li>
+                                <li><strong>Normalization:</strong> Scales pixel values (e.g. multiplying by 1/255.0 to map RGB colors from 0-255 to 0.0-1.0).</li>
+                                <li><strong>Channel Swapping:</strong> Swaps red and blue channels (BGR to RGB) because OpenCV loads images as BGR, while SOTA deep learning networks expect RGB.</li>
+                                <li><strong>Mean Subtraction:</strong> (Optional) Subtracts average dataset pixel values to center the dataset distribution.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="qa-block">
+                    <div class="qa-question" onclick="toggleQA(this)">How is the output tensor shape of YOLOv8 structured, and how do we parse it in C++?</div>
+                    <div class="qa-answer">
+                        <div class="qa-answer-content">
+                            <strong>Answer:</strong> The raw output of YOLOv8 is a tensor of shape <strong>`[1, 84, 8400]`</strong>. 
+                            <ul>
+                                <li><strong>1:</strong> Batch size.</li>
+                                <li><strong>84:</strong> 4 bounding box coordinates (center-x, center-y, width, height) + 80 class confidence scores.</li>
+                                <li><strong>8400:</strong> Number of candidate boxes/anchors.</li>
+                            </ul>
+                            To parse this in C++, we flatten the batch dimension to get a `[84, 8400]` matrix and transpose it to `[8400, 84]` for easier row-by-row iteration. For each of the 8400 candidates:
+                            <ol>
+                                <li>We read the class confidence score (for target class 'person', index 4).</li>
+                                <li>If the score exceeds our threshold, we extract the bounding box center coordinates `[0, 1]` and sizes `[2, 3]`.</li>
+                                <li>We convert center coordinates to top-left corner coordinates: `left = cx - 0.5 * w`, `top = cy - 0.5 * h`.</li>
+                                <li>We scale coordinate values back to the original image dimensions using scale factors.</li>
+                                <li>Finally, we run the coordinates through `cv::dnn::NMSBoxes` to perform Non-Maximum Suppression and remove overlapping boxes.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final callout box -->
+        <div class="callout">
+            <span class="callout-icon">💡</span>
+            <div class="callout-body">
+                <h5>Pro-Tip for the Interview</h5>
+                <p>Be ready to explain how you optimized the model for CPU execution. Emphasize that exporting to <strong>ONNX</strong> removes Python framework overhead, and that <strong>OpenVINO</strong> compiles and schedules threads on Intel CPU instruction sets to achieve maximum edge throughput.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(event, tabId) {
+            // Remove active classes from all buttons and panels
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.content-panel').forEach(panel => panel.classList.remove('active'));
+            
+            // Add active class to current button and panel
+            event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function toggleQA(element) {
+            const block = element.parentElement;
+            block.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
