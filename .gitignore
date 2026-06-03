@@ -1,0 +1,26 @@
+# YOLOv8 model weights (auto-downloaded)
+*.pt
+
+# Videos
+*.mp4
+*.avi
+
+# Logs
+*.log
+output.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
