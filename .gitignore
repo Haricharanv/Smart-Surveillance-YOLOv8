@@ -1,5 +1,6 @@
 # YOLOv8 model weights (auto-downloaded)
 *.pt
+*.onnx
 
 # Videos
 *.mp4

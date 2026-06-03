@@ -44,14 +44,42 @@ pip install ultralytics opencv-python numpy
 
 ## Usage
 
+### 1. Main Surveillance Pipeline
+Run the main real-time surveillance system:
 ```bash
 python smart_surveillance.py
 ```
+- **Webcam Mode**: Automatically runs on camera `0`. If blocked or in use, it falls back to Demo Mode.
+- **Demo Mode**: Downloads and loops a sample video `people_walking.mp4`.
+- **Keyboard Controls**:
+  - `C`: Cycle between sensor colormaps (*Inferno, Bone, Hot, Jet*).
+  - `F`: Toggle edge fusion on/off.
+  - `Z`: Toggle boundary zone visibility.
+  - `Q`: Close the application.
 
-- The system will open your webcam and display a split-screen view
-- **Left**: Raw camera feed
-- **Right**: Electro-optic AI feed with detections, tracking, and zone alerts
-- Press **'q'** to quit
+### 2. Model Export & CPU Benchmarking (ONNX)
+Export the YOLOv8 PyTorch model weights (`.pt`) to the ONNX Runtime format and benchmark execution speeds on CPU:
+```bash
+python export_model.py
+```
+
+### 3. Evaluation & Tracking Metrics Sandbox
+Calculate Intersection over Union (IoU) between bounding boxes, compute classification metrics (Precision, Recall, F1), and read explanations of advanced tracking metrics (MOTA, IDF1):
+```bash
+python evaluate_metrics.py
+```
+
+### 4. C++ Inference Integration Sandbox
+Build and run the C++ client to load the exported `yolov8n.onnx` model, perform image preprocessing, and parse raw prediction tensors using OpenCV's DNN module:
+```bash
+# Setup build directory
+mkdir build && cd build
+cmake ..
+cmake --build . --config Release
+
+# Run the compiled C++ inference demo
+./Release/inference_demo
+```
 
 ## Pipeline Architecture
 
